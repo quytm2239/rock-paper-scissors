@@ -12,6 +12,13 @@ var timer = roundTime;
 const CronJob = require('cron').CronJob;
 
 function findWinner() {
+    if (choices.length == 1) {
+      var choice = choiceType[Math.floor(Math.random() * choiceType.length)];
+      choices.push({
+          name: "Unbeatable BOT",
+          choice: choice,
+      });
+    }
     const sameResult = choices.map(x => x.choice);
     var set = new Set(sameResult);
     console.log(set);
