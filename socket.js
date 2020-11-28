@@ -21,9 +21,11 @@ function findWinner() {
     }
     const sameResult = choices.map(x => x.choice);
     var set = new Set(sameResult);
-    console.log(set);
+    let myArr = Array.from(set)
+    console.log(myArr.length);
+    console.log(choiceType.length);
 
-    if (set.length == 1 || set.length == choiceType.length) {
+    if (set.length == 1 || myArr.length == choiceType.length) {
         for (var i in choices) {
             choices[i].state = "Draw";
         }
@@ -32,7 +34,6 @@ function findWinner() {
             choices: choices
         }
     }
-    let myArr = Array.from(set)
 
     var group1 = choices.filter(choice => myArr[0] == choice.choice);
     var group2 = choices.filter(choice => myArr[1] == choice.choice);
