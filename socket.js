@@ -5,6 +5,7 @@ var roundStart = false;
 var roundWait = false;
 const roundTime = 5;
 const waittingTime = 5;
+var choiceType = ["Rock", "Paper", "Scissors"]
 
 var timer = roundTime;
 
@@ -15,10 +16,10 @@ function findWinner() {
     var set = new Set(sameResult);
     console.log(set);
 
-    if (set.length == 1 || set.length == choices.length) {
-      for (var i in choices) {
-          choices[i].state = "Draw";
-      }
+    if (set.length == 1 || set.length == choiceType.length) {
+        for (var i in choices) {
+            choices[i].state = "Draw";
+        }
         return {
             result: "Draw",
             choices: choices
@@ -175,7 +176,7 @@ module.exports = function(io) {
 
             var room = io.sockets.adapter.rooms[common_room];
             io.sockets["in"](common_room).emit('join_game', {
-              join_game: room.length
+                join_game: room.length
             });
         });
 
@@ -190,11 +191,11 @@ module.exports = function(io) {
             }
             var found = false;
             for (i = 0; i < choices.length; i++) {
-              if (choices[i].name == socket.username) {
-                  choices[i].choice = data;
-                  found = true;
-                  break; //Stop this loop, we found it!
-              }
+                if (choices[i].name == socket.username) {
+                    choices[i].choice = data;
+                    found = true;
+                    break; //Stop this loop, we found it!
+                }
             }
             if (!found) {
                 choices.push({
